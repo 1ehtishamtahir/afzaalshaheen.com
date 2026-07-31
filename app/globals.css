@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-canvas: #0e100f;
+  --color-cream: #fffce1;
+  --color-muted: #7c7c6f;
+  --color-hairline: #42433d;
+  --color-panel: #191919;
+  --color-gold: #b08d57;
+  --color-gold-light: #e8c88f;
+
+  --font-sans: 'Inter Tight', sans-serif;
+  
+  --radius-cards: 8px;
+  --radius-buttons: 100px;
+}
+
+:root {
+  /* Colors */
+  --color-canvas: #0e100f;
+  --color-cream: #fffce1;
+  --color-muted: #7c7c6f;
+  --color-hairline: #42433d;
+  --color-panel: #191919;
+  --color-gold: #b08d57;
+  --color-gold-light: #e8c88f;
+  --gradient-gold: linear-gradient(114.41deg, #b08d57 20%, #e8c88f 65%);
+}
+
+/* Base styles */
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Text Hierarchy */
+.text-display {
+  font-size: clamp(80px, 12vw, 180px);
+  line-height: 0.9;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.text-heading-lg {
+  font-size: clamp(48px, 8vw, 101px);
+  line-height: 1;
+  font-weight: 600;
+}
+
+.text-heading {
+  font-size: clamp(36px, 6vw, 66px);
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.text-heading-sm {
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.text-subheading {
+  font-size: clamp(20px, 3vw, 34px);
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.text-body-lg {
+  font-size: 23px;
+  line-height: 1.38;
+  font-weight: 400;
+}
+
+.text-body {
+  font-size: 19px;
+  line-height: 1.15;
+  font-weight: 400;
+}
+
+.text-body-sm {
+  font-size: 16px;
+  line-height: 1.15;
+  font-weight: 400;
+}
+
+.text-caption {
+  font-size: 14px;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+/* Custom Components & Utilities */
+.hairline-divider {
+  height: 1px;
+  background-color: var(--color-hairline);
+  width: 100%;
+}
+
+/* Magnetic Ghost Pill Button */
+.btn-ghost-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border: 1px solid var(--color-cream);
+  border-radius: var(--radius-buttons);
+  background-color: transparent;
+  color: var(--color-cream);
+  font-size: 16px;
+  font-weight: 400;
+  transition: opacity 0.3s ease, transform 0.1s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-ghost-pill:hover {
+  opacity: 0.8;
+}
+
+/* Gradient CTA Pill */
+.btn-gradient-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 28px;
+  border-radius: var(--radius-buttons);
+  background-color: var(--color-canvas);
+  color: var(--color-cream);
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
+.btn-gradient-pill::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: var(--radius-buttons);
+  background: var(--gradient-gold);
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+.btn-gradient-pill:hover {
+  opacity: 0.9;
+}
+
+/* Bracket annotations */
+.bracket-annotation {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-cream);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+/* Smooth Scrolling styles */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis-smooth [data-lenis-prevent] {
+  overflow: clip;
+}
+
+.lenis-smooth iframe {
+  pointer-events: none;
+}

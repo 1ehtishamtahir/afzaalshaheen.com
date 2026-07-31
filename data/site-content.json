@@ -1,0 +1,159 @@
+{
+  "hero": {
+    "eyebrow": "",
+    "line1": "Tactile",
+    "line2": "Refinement",
+    "subheading": "Premium unstitched fabrics & ready-to-wear menswear, curated for the modern Pakistani gentleman.",
+    "ctaText": "Shop the Collection",
+    "bgImage": "/images/uploads/1785516052849_ChatGPT_Image_Jul_31__2026__09_40_40_AM.png"
+  },
+  "brandStatement": {
+    "eyebrow": " The Studio ",
+    "text": "We construct refined ready-to-wear silhouettes and uncompromised unstitched fabrics. Every warp and weft is curated for the modern gentleman who commands understated luxury."
+  },
+  "collections": [
+    {
+      "id": 1,
+      "title": "Unstitched Fabrics",
+      "subtitle": "Premium raw textures for complete tailored personalization.",
+      "href": "#unstitched",
+      "image": "/images/WhatsApp-Image-2025-02-18-at-13.25.06_a7aeddf2-scaled.jpg",
+      "paddingTop": 0
+    },
+    {
+      "id": 2,
+      "title": "Ready to Wear",
+      "subtitle": "Sharp silhouettes crafted for immediate comfort and style.",
+      "href": "#stitched",
+      "image": "/images/IMG-20250218-WA0009-scaled.jpg",
+      "paddingTop": 96
+    }
+  ],
+  "newArrivals": [
+    {
+      "id": 1,
+      "name": "Snow White Cotton",
+      "price": "PKR 3400-3800",
+      "image": "/images/uploads/1785516783161_Snow_White_Cotton.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Midnight Karandi",
+      "price": "PKR 9,200",
+      "image": "/images/IMG-20250218-WA0002-scaled.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Royal Cotton Set",
+      "price": "PKR 12,000",
+      "image": "/images/IMG-20250218-WA0010-scaled.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Sandy Linen Coord",
+      "price": "PKR 7,800",
+      "image": "/images/IMG-20250218-WA0012-scaled.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Premium Wash Suit",
+      "price": "PKR 10,500",
+      "image": "/images/IMG-20250218-WA0014-scaled.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Formal Elegance",
+      "price": "PKR 11,000",
+      "image": "/images/IMG-20250218-WA0015-scaled.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Heritage Fabric Co.",
+      "price": "PKR 8,800",
+      "image": "/images/IMG-20250218-WA0008-scaled.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Ivory Shalwar Kameez",
+      "price": "PKR 9,600",
+      "image": "/images/IMG-20250218-WA0011-scaled.jpg"
+    }
+  ],
+  "fabricStory": {
+    "bgImage": "/images/uploads/1785516984578_ChatGPT_Image_Jul_31__2026__09_56_13_AM.png",
+    "blocks": [
+      {
+        "eyebrow": " The Fabric ",
+        "title": "Woven Integrity",
+        "body": "Every thread of our unstitched fabrics is a testament to heritage craftsmanship. Selected from the finest Egyptian cotton fibers and pure wool blends, our fabrics offer unparalleled drape and hand."
+      },
+      {
+        "eyebrow": "{ The Selection }",
+        "title": "Unrivaled Quality",
+        "body": "From crisp linen coordinates to luxurious latha suits, our range adapts to every climate and occasion. We respect the raw properties of fibers to ensure durability, softness, and timelessness."
+      },
+      {
+        "eyebrow": "{ The Heritage }",
+        "title": "Decades of Craft",
+        "body": "Honoring centuries-old weaving traditions, we collaborate with legendary textile mills to deliver fabrics that command distinction — clothes that live through memory."
+      }
+    ]
+  },
+  "lookbook": [
+    {
+      "id": 1,
+      "src": "/images/IMG-20250221-WA0002-scaled.jpg",
+      "alt": "Premium menswear draped look",
+      "tall": false
+    },
+    {
+      "id": 2,
+      "src": "/images/IMG-20250221-WA0003-scaled.jpg",
+      "alt": "Tailored fabric close-up",
+      "tall": true
+    },
+    {
+      "id": 3,
+      "src": "/images/WhatsApp-Image-2025-02-14-at-07.04.54_7442e752-2-2048x2048.jpg",
+      "alt": "Textured fabric folds",
+      "tall": false
+    },
+    {
+      "id": 4,
+      "src": "/images/IMG-20250221-WA0011-2048x2048.jpg",
+      "alt": "Premium draped silhouette",
+      "tall": true
+    },
+    {
+      "id": 5,
+      "src": "/images/IMG-20250221-WA0008-2048x2048.jpg",
+      "alt": "Classic menswear editorial",
+      "tall": false
+    },
+    {
+      "id": 6,
+      "src": "/images/WhatsApp-Image-2025-05-01-at-8.02.37-AM-2048x2048.jpg",
+      "alt": "Unstitched fabric details",
+      "tall": true
+    }
+  ],
+  "trustStrip": [
+    {
+      "title": "Nationwide Delivery",
+      "body": "Complimentary shipping on orders over PKR 10,000. Delivered across Pakistan."
+    },
+    {
+      "title": "Secure Payment",
+      "body": "Fully encrypted checkout with local debit and cash on delivery support."
+    },
+    {
+      "title": "Prompt Support",
+      "body": "Direct WhatsApp assistance for fitting advice and order queries."
+    }
+  ],
+  "newsletter": {
+    "eyebrow": " Signature Club ",
+    "title": "Join the Elite",
+    "body": "Subscribe to receive private lookbooks, seasonal fabric drops, and priority access to limited edition collections."
+  }
+}
