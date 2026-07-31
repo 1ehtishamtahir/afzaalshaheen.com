@@ -54,7 +54,7 @@ export default function NewArrivals({ data }: NewArrivalsProps) {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: 48, gap: 16, flexWrap: 'wrap' }}>
           <div>
             <span style={{ fontSize: 14, color: 'rgba(255,252,225,0.5)', letterSpacing: '0.15em', textTransform: 'uppercase', display: 'block', marginBottom: 12 }}>
-              &#123; New Arrivals &#125;
+              New Arrivals
             </span>
             <h2 style={{ fontSize: 'clamp(28px, 4vw, 52px)', color: '#fffce1', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '-0.02em', margin: 0 }}>
               Tactile Masterpieces

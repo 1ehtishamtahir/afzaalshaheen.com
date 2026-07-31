@@ -55,7 +55,7 @@ export default function FeaturedCollections({ data }: FeaturedCollectionsProps) 
     >
       <div style={{ maxWidth: 1280, margin: '0 auto' }} ref={containerRef}>
         <span style={{ fontSize: 14, color: 'rgba(255,252,225,0.5)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 48, display: 'block' }}>
-          &#123; Featured Collections &#125;
+          Featured Collections
         </span>
 
         {/* Asymmetric grid */}

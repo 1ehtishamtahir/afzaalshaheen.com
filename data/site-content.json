@@ -27,6 +27,14 @@
       "href": "#stitched",
       "image": "/images/uploads/1785517822256_imgi_88_jjms-2078_charcoal_grey_-430x551.webp",
       "paddingTop": 96
+    },
+    {
+      "title": "Prime Cotton",
+      "subtitle": "Premium raw textures for complete tailored personalization.",
+      "href": "#",
+      "image": "/images/uploads/1785521265936_imgi_4_Safeer-Unstitched-Men-Wear-Collection-by-Edenrobe7.jpg",
+      "paddingTop": 0,
+      "id": 1785521236520
     }
   ],
   "newArrivals": [
@@ -155,5 +163,37 @@
     "eyebrow": " Signature Club ",
     "title": "Join the Elite",
     "body": "Subscribe to receive private lookbooks, seasonal fabric drops, and priority access to limited edition collections."
+  },
+  "socialLinks": [
+    {
+      "label": "Instagram",
+      "href": "https://www.instagram.com/afzaalshaheen.brand/"
+    },
+    {
+      "label": "Facebook",
+      "href": "https://www.facebook.com/profile.php?id=61571908798285"
+    },
+    {
+      "label": "TikTok",
+      "href": "https://www.tiktok.com/@afzaalshaheen2025"
+    },
+    {
+      "label": "WhatsApp",
+      "href": "https://wa.me/+923001507609"
+    }
+  ],
+  "footer": {
+    "brandText": "A premium menswear & unstitched-fabric label crafting refined silhouettes with tactile perfection since 1998.",
+    "copyright": "Afzaal Shaheen. All rights reserved.",
+    "policyLinks": [
+      "Privacy Policy",
+      "Terms of Service"
+    ]
+  },
+  "contact": {
+    "phone": "+92 300 0000000",
+    "email": "hello@afzaalshaheen.com",
+    "address": "Karachi, Pakistan",
+    "whatsapp": "https://wa.me/923000000000"
   }
 }

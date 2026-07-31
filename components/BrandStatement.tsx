@@ -15,7 +15,7 @@ interface BrandStatementProps {
 
 export default function BrandStatement({ data }: BrandStatementProps) {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const textRef = useRef<HTMLParagraphElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -56,19 +56,41 @@ export default function BrandStatement({ data }: BrandStatementProps) {
         <span style={{ fontSize: 14, color: 'rgba(255,252,225,0.5)', letterSpacing: '0.15em', textTransform: 'uppercase', marginBottom: 32 }}>
           {data.eyebrow}
         </span>
-        <p
+        <div
           ref={textRef}
-          style={{
-            fontSize: 'clamp(22px, 3vw, 38px)',
-            color: '#fffce1',
-            fontWeight: 400,
-            lineHeight: 1.35,
-            maxWidth: 880,
-            letterSpacing: '-0.01em',
-          }}
+          className="marquee-container"
+          style={{ maxWidth: 1280 }}
         >
-          {data.text}
-        </p>
+          <div className="marquee-track">
+            <span
+              className="marquee-item"
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: 'clamp(24px, 3.4vw, 44px)',
+                color: '#fffce1',
+                fontWeight: 400,
+                lineHeight: 1.35,
+                letterSpacing: '-0.01em',
+              }}
+            >
+              {data.text}
+            </span>
+            <span
+              className="marquee-item"
+              aria-hidden="true"
+              style={{
+                fontFamily: 'var(--font-serif)',
+                fontSize: 'clamp(24px, 3.4vw, 44px)',
+                color: '#fffce1',
+                fontWeight: 400,
+                lineHeight: 1.35,
+                letterSpacing: '-0.01em',
+              }}
+            >
+              {data.text}
+            </span>
+          </div>
+        </div>
         <div style={{ height: 1, backgroundColor: '#42433d', width: '100%', marginTop: 80 }} />
       </div>
     </section>

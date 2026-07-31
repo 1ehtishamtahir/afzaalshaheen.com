@@ -125,6 +125,37 @@ export default function AdminPage() {
     }
   };
 
+  const addListItem = (key: string, template: any) => {
+    const updated = [...(content[key] || []), { ...template, id: Date.now() }];
+    setContent({ ...content, [key]: updated });
+  };
+
+  const removeListItem = (key: string, index: number) => {
+    const updated = (content[key] || []).filter((_: any, i: number) => i !== index);
+    setContent({ ...content, [key]: updated });
+  };
+
+  const addFabricBlock = () => {
+    const updated = { ...content.fabricStory };
+    updated.blocks = [...updated.blocks, { eyebrow: ' The Studio ', title: 'New Story Block', body: 'Block copy here.' }];
+    setContent({ ...content, fabricStory: updated });
+  };
+
+  const removeFabricBlock = (index: number) => {
+    const updated = { ...content.fabricStory };
+    updated.blocks = updated.blocks.filter((_: any, i: number) => i !== index);
+    setContent({ ...content, fabricStory: updated });
+  };
+
+  const addPolicyLink = () => {
+    setContent({ ...content, footer: { ...content.footer, policyLinks: [...(content.footer.policyLinks || []), 'New Policy Link'] } });
+  };
+
+  const removePolicyLink = (index: number) => {
+    const policyLinks = (content.footer.policyLinks || []).filter((_: string, i: number) => i !== index);
+    setContent({ ...content, footer: { ...content.footer, policyLinks } });
+  };
+
   // Login UI
   if (authenticated === false) {
     return (
@@ -184,7 +215,7 @@ export default function AdminPage() {
 
         {/* Tab Selection */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 32, borderBottom: '1px solid #42433d', paddingBottom: 8, overflowX: 'auto' }}>
-          {['hero', 'studio', 'collections', 'products', 'fabric', 'lookbook', 'trust', 'newsletter'].map((tab) => (
+          {['hero', 'studio', 'collections', 'products', 'fabric', 'lookbook', 'trust', 'newsletter', 'social', 'footer', 'contact'].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
@@ -313,10 +344,27 @@ export default function AdminPage() {
           {/* COLLECTIONS */}
           {activeTab === 'collections' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-              <h3 style={{ margin: 0, textTransform: 'uppercase', fontSize: 18 }}>Featured Collections</h3>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3 style={{ margin: 0, textTransform: 'uppercase', fontSize: 18 }}>Featured Collections</h3>
+                <button
+                  className="btn-ghost-pill"
+                  style={{ padding: '8px 16px', fontSize: 12 }}
+                  onClick={() => addListItem('collections', { title: 'New Collection', subtitle: 'Subtitle copy here.', href: '#', image: '', paddingTop: 0 })}
+                >
+                  + Add Collection
+                </button>
+              </div>
               {content.collections.map((col: any, index: number) => (
                 <div key={col.id} style={{ border: '1px solid #42433d', padding: 24, borderRadius: 6, display: 'flex', flexDirection: 'column', gap: 16 }}>
-                  <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57' }}>Collection Item #{index + 1}</h4>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57' }}>Collection Item #{index + 1}</h4>
+                    <button
+                      onClick={() => removeListItem('collections', index)}
+                      style={{ padding: '6px 14px', fontSize: 12, background: 'none', border: '1px solid #7c7c6f', borderRadius: 100, color: '#7c7c6f', cursor: 'pointer' }}
+                    >
+                      Remove
+                    </button>
+                  </div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                       <label style={{ fontSize: 13, color: '#7c7c6f' }}>Title</label>
@@ -374,11 +422,28 @@ export default function AdminPage() {
           {/* PRODUCTS */}
           {activeTab === 'products' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-              <h3 style={{ margin: 0, textTransform: 'uppercase', fontSize: 18 }}>New Arrivals (8 Product Grid)</h3>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3 style={{ margin: 0, textTransform: 'uppercase', fontSize: 18 }}>New Arrivals (8 Product Grid)</h3>
+                <button
+                  className="btn-ghost-pill"
+                  style={{ padding: '8px 16px', fontSize: 12 }}
+                  onClick={() => addListItem('newArrivals', { name: 'New Product', price: 'PKR 0000-0000', image: '' })}
+                >
+                  + Add Product
+                </button>
+              </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
                 {content.newArrivals.map((product: any, index: number) => (
                   <div key={product.id} style={{ border: '1px solid #42433d', padding: 20, borderRadius: 6, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                    <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57', fontSize: 14 }}>Product #{index + 1}</h4>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57', fontSize: 14 }}>Product #{index + 1}</h4>
+                      <button
+                        onClick={() => removeListItem('newArrivals', index)}
+                        style={{ padding: '4px 12px', fontSize: 11, background: 'none', border: '1px solid #7c7c6f', borderRadius: 100, color: '#7c7c6f', cursor: 'pointer' }}
+                      >
+                        Remove
+                      </button>
+                    </div>
                     <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 12 }}>
                       <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                         <label style={{ fontSize: 12, color: '#7c7c6f' }}>Product Name</label>
@@ -437,7 +502,16 @@ export default function AdminPage() {
           {/* FABRIC */}
           {activeTab === 'fabric' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-              <h3 style={{ margin: 0, textTransform: 'uppercase', fontSize: 18 }}>Fabric Story</h3>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3 style={{ margin: 0, textTransform: 'uppercase', fontSize: 18 }}>Fabric Story</h3>
+                <button
+                  className="btn-ghost-pill"
+                  style={{ padding: '8px 16px', fontSize: 12 }}
+                  onClick={addFabricBlock}
+                >
+                  + Add Block
+                </button>
+              </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                 <label style={{ fontSize: 13, color: '#7c7c6f' }}>Featured Image (Recommended Size: 900x1200 WebP/JPG)</label>
                 <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
@@ -462,7 +536,15 @@ export default function AdminPage() {
 
               {content.fabricStory.blocks.map((block: any, index: number) => (
                 <div key={index} style={{ border: '1px solid #42433d', padding: 24, borderRadius: 6, display: 'flex', flexDirection: 'column', gap: 16 }}>
-                  <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57' }}>Story Block #{index + 1}</h4>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57' }}>Story Block #{index + 1}</h4>
+                    <button
+                      onClick={() => removeFabricBlock(index)}
+                      style={{ padding: '6px 14px', fontSize: 12, background: 'none', border: '1px solid #7c7c6f', borderRadius: 100, color: '#7c7c6f', cursor: 'pointer' }}
+                    >
+                      Remove
+                    </button>
+                  </div>
                   <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
                       <label style={{ fontSize: 13, color: '#7c7c6f' }}>Eyebrow</label>
@@ -512,11 +594,28 @@ export default function AdminPage() {
           {/* LOOKBOOK */}
           {activeTab === 'lookbook' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 32 }}>
-              <h3 style={{ margin: 0, textTransform: 'uppercase', fontSize: 18 }}>Masonry Lookbook (6 Images)</h3>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3 style={{ margin: 0, textTransform: 'uppercase', fontSize: 18 }}>Masonry Lookbook (6 Images)</h3>
+                <button
+                  className="btn-ghost-pill"
+                  style={{ padding: '8px 16px', fontSize: 12 }}
+                  onClick={() => addListItem('lookbook', { src: '', alt: 'Premium menswear look', tall: false })}
+                >
+                  + Add Image
+                </button>
+              </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
                 {content.lookbook.map((img: any, index: number) => (
                   <div key={img.id} style={{ border: '1px solid #42433d', padding: 20, borderRadius: 6, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                    <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57', fontSize: 14 }}>Image Slot #{index + 1} ({img.tall ? 'Tall' : 'Wide'})</h4>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                      <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57', fontSize: 14 }}>Image Slot #{index + 1} ({img.tall ? 'Tall' : 'Wide'})</h4>
+                      <button
+                        onClick={() => removeListItem('lookbook', index)}
+                        style={{ padding: '4px 12px', fontSize: 11, background: 'none', border: '1px solid #7c7c6f', borderRadius: 100, color: '#7c7c6f', cursor: 'pointer' }}
+                      >
+                        Remove
+                      </button>
+                    </div>
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                       <label style={{ fontSize: 12, color: '#7c7c6f' }}>Alt Description</label>
                       <input
@@ -560,10 +659,27 @@ export default function AdminPage() {
           {/* TRUST */}
           {activeTab === 'trust' && (
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-              <h3 style={{ margin: 0, textTransform: 'uppercase', fontSize: 18 }}>Trust Badges</h3>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3 style={{ margin: 0, textTransform: 'uppercase', fontSize: 18 }}>Trust Badges</h3>
+                <button
+                  className="btn-ghost-pill"
+                  style={{ padding: '8px 16px', fontSize: 12 }}
+                  onClick={() => addListItem('trustStrip', { title: 'New Badge', body: 'Badge description here.' })}
+                >
+                  + Add Badge
+                </button>
+              </div>
               {content.trustStrip.map((item: any, index: number) => (
                 <div key={index} style={{ border: '1px solid #42433d', padding: 20, borderRadius: 6, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                  <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57', fontSize: 14 }}>Badge #{index + 1}</h4>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57', fontSize: 14 }}>Badge #{index + 1}</h4>
+                    <button
+                      onClick={() => removeListItem('trustStrip', index)}
+                      style={{ padding: '4px 12px', fontSize: 11, background: 'none', border: '1px solid #7c7c6f', borderRadius: 100, color: '#7c7c6f', cursor: 'pointer' }}
+                    >
+                      Remove
+                    </button>
+                  </div>
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                     <label style={{ fontSize: 12, color: '#7c7c6f' }}>Badge Title</label>
                     <input
@@ -626,6 +742,171 @@ export default function AdminPage() {
                   value={content.newsletter.body}
                   onChange={(e) => setContent({ ...content, newsletter: { ...content.newsletter, body: e.target.value } })}
                   style={{ padding: 12, backgroundColor: '#0e100f', border: '1px solid #42433d', borderRadius: 4, color: '#fffce1', resize: 'none' }}
+                />
+              </div>
+            </div>
+          )}
+
+          {/* SOCIAL */}
+          {activeTab === 'social' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <h3 style={{ margin: 0, textTransform: 'uppercase', fontSize: 18 }}>Social Media Links</h3>
+                <button
+                  className="btn-ghost-pill"
+                  style={{ padding: '8px 16px', fontSize: 12 }}
+                  onClick={() => addListItem('socialLinks', { label: 'New Platform', href: 'https://' })}
+                >
+                  + Add Platform
+                </button>
+              </div>
+              <p style={{ fontSize: 13, color: '#7c7c6f', margin: 0 }}>
+                These appear in the footer "Follow" column. Paste the full profile URLs, e.g. https://instagram.com/yourhandle
+              </p>
+              {content.socialLinks.map((link: any, index: number) => (
+                <div key={index} style={{ border: '1px solid #42433d', padding: 20, borderRadius: 6, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57', fontSize: 14 }}>Platform #{index + 1}</h4>
+                    <button
+                      onClick={() => removeListItem('socialLinks', index)}
+                      style={{ padding: '4px 12px', fontSize: 11, background: 'none', border: '1px solid #7c7c6f', borderRadius: 100, color: '#7c7c6f', cursor: 'pointer' }}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 12 }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                      <label style={{ fontSize: 12, color: '#7c7c6f' }}>Platform Label</label>
+                      <input
+                        type="text"
+                        value={link.label}
+                        onChange={(e) => {
+                          const updated = [...content.socialLinks];
+                          updated[index].label = e.target.value;
+                          setContent({ ...content, socialLinks: updated });
+                        }}
+                        style={{ padding: 10, backgroundColor: '#0e100f', border: '1px solid #42433d', borderRadius: 4, color: '#fffce1', fontSize: 13 }}
+                      />
+                    </div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                      <label style={{ fontSize: 12, color: '#7c7c6f' }}>Profile URL</label>
+                      <input
+                        type="text"
+                        value={link.href}
+                        onChange={(e) => {
+                          const updated = [...content.socialLinks];
+                          updated[index].href = e.target.value;
+                          setContent({ ...content, socialLinks: updated });
+                        }}
+                        style={{ padding: 10, backgroundColor: '#0e100f', border: '1px solid #42433d', borderRadius: 4, color: '#fffce1', fontSize: 13 }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* FOOTER */}
+          {activeTab === 'footer' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+              <h3 style={{ margin: 0, textTransform: 'uppercase', fontSize: 18 }}>Footer Content</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <label style={{ fontSize: 13, color: '#7c7c6f' }}>Brand Description</label>
+                <textarea
+                  rows={3}
+                  value={content.footer.brandText}
+                  onChange={(e) => setContent({ ...content, footer: { ...content.footer, brandText: e.target.value } })}
+                  style={{ padding: 12, backgroundColor: '#0e100f', border: '1px solid #42433d', borderRadius: 4, color: '#fffce1', resize: 'none' }}
+                />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <label style={{ fontSize: 13, color: '#7c7c6f' }}>Copyright Line (shown after the year)</label>
+                <input
+                  type="text"
+                  value={content.footer.copyright}
+                  onChange={(e) => setContent({ ...content, footer: { ...content.footer, copyright: e.target.value } })}
+                  style={{ padding: 12, backgroundColor: '#0e100f', border: '1px solid #42433d', borderRadius: 4, color: '#fffce1' }}
+                />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <label style={{ fontSize: 13, color: '#7c7c6f' }}>Bottom Policy Links</label>
+                  <button
+                    className="btn-ghost-pill"
+                    style={{ padding: '6px 14px', fontSize: 11 }}
+                    onClick={addPolicyLink}
+                  >
+                    + Add Link
+                  </button>
+                </div>
+                {content.footer.policyLinks.map((item: string, index: number) => (
+                  <div key={index} style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+                    <input
+                      type="text"
+                      value={item}
+                      onChange={(e) => {
+                        const policyLinks = [...content.footer.policyLinks];
+                        policyLinks[index] = e.target.value;
+                        setContent({ ...content, footer: { ...content.footer, policyLinks } });
+                      }}
+                      style={{ flex: 1, padding: 10, backgroundColor: '#0e100f', border: '1px solid #42433d', borderRadius: 4, color: '#fffce1', fontSize: 13 }}
+                    />
+                    <button
+                      onClick={() => removePolicyLink(index)}
+                      style={{ padding: '6px 12px', fontSize: 11, background: 'none', border: '1px solid #7c7c6f', borderRadius: 100, color: '#7c7c6f', cursor: 'pointer', whiteSpace: 'nowrap' }}
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* CONTACT */}
+          {activeTab === 'contact' && (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+              <h3 style={{ margin: 0, textTransform: 'uppercase', fontSize: 18 }}>Contact Information</h3>
+              <p style={{ fontSize: 13, color: '#7c7c6f', margin: 0 }}>
+                Displayed in the footer "Contact" column.
+              </p>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <label style={{ fontSize: 13, color: '#7c7c6f' }}>Phone</label>
+                  <input
+                    type="text"
+                    value={content.contact.phone}
+                    onChange={(e) => setContent({ ...content, contact: { ...content.contact, phone: e.target.value } })}
+                    style={{ padding: 12, backgroundColor: '#0e100f', border: '1px solid #42433d', borderRadius: 4, color: '#fffce1' }}
+                  />
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  <label style={{ fontSize: 13, color: '#7c7c6f' }}>Email</label>
+                  <input
+                    type="text"
+                    value={content.contact.email}
+                    onChange={(e) => setContent({ ...content, contact: { ...content.contact, email: e.target.value } })}
+                    style={{ padding: 12, backgroundColor: '#0e100f', border: '1px solid #42433d', borderRadius: 4, color: '#fffce1' }}
+                  />
+                </div>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <label style={{ fontSize: 13, color: '#7c7c6f' }}>Address</label>
+                <input
+                  type="text"
+                  value={content.contact.address}
+                  onChange={(e) => setContent({ ...content, contact: { ...content.contact, address: e.target.value } })}
+                  style={{ padding: 12, backgroundColor: '#0e100f', border: '1px solid #42433d', borderRadius: 4, color: '#fffce1' }}
+                />
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <label style={{ fontSize: 13, color: '#7c7c6f' }}>WhatsApp Link (full wa.me URL)</label>
+                <input
+                  type="text"
+                  value={content.contact.whatsapp}
+                  onChange={(e) => setContent({ ...content, contact: { ...content.contact, whatsapp: e.target.value } })}
+                  style={{ padding: 12, backgroundColor: '#0e100f', border: '1px solid #42433d', borderRadius: 4, color: '#fffce1' }}
                 />
               </div>
             </div>

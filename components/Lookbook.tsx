@@ -69,7 +69,7 @@ export default function Lookbook({ data }: LookbookProps) {
     <section id="lookbook" style={{ backgroundColor: '#0e100f', padding: '80px 48px' }}>
       <div style={{ maxWidth: 1280, margin: '0 auto' }} ref={containerRef}>
         <span style={{ fontSize: 14, color: 'rgba(255,252,225,0.5)', letterSpacing: '0.15em', textTransform: 'uppercase', display: 'block', marginBottom: 48 }}>
-          &#123; Lookbook &#125;
+          Lookbook
         </span>
 
         {/* Offset masonry grid */}

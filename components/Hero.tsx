@@ -4,8 +4,9 @@ import { useEffect, useRef } from 'react';
 import Image from 'next/image';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { SplitText } from 'gsap/SplitText';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, SplitText);
 
 interface HeroProps {
   data: {
@@ -22,7 +23,7 @@ export default function Hero({ data }: HeroProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
-  const eyebrowRef = useRef<HTMLSpanElement>(null);
+  const dividerRef = useRef<HTMLDivElement>(null);
   const ctaRef = useRef<HTMLAnchorElement>(null);
   const subRef = useRef<HTMLParagraphElement>(null);
 
@@ -45,20 +46,30 @@ export default function Hero({ data }: HeroProps) {
       // Hero entrance timeline
       const tl = gsap.timeline({ defaults: { ease: 'power4.out' } });
 
-      tl.fromTo(eyebrowRef.current, { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 0.8 });
+      // Split headline into per-letter spans for the reveal
+      const splits: SplitText[] = [];
+      const chars: HTMLElement[] = [];
+      titleRef.current?.querySelectorAll('.hero-line').forEach((lineEl) => {
+        const split = new SplitText(lineEl as HTMLElement, { type: 'chars' });
+        splits.push(split);
+        chars.push(...(split.chars as HTMLElement[]));
+      });
 
-      const lines = titleRef.current?.querySelectorAll('.hero-line');
-      if (lines && lines.length > 0) {
+      if (chars.length > 0) {
         tl.fromTo(
-          lines,
-          { yPercent: 110, opacity: 0 },
-          { yPercent: 0, opacity: 1, duration: 1.1, stagger: 0.12 },
-          '-=0.4'
+          chars,
+          { yPercent: 120, opacity: 0, rotate: 5, filter: 'blur(8px)' },
+          { yPercent: 0, opacity: 1, rotate: 0, filter: 'blur(0px)', duration: 1.1, stagger: 0.03 }
         );
       }
 
       tl.fromTo(subRef.current, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.8 }, '-=0.5');
+      tl.fromTo(dividerRef.current, { scaleX: 0 }, { scaleX: 1, duration: 1, ease: 'power3.out' }, '-=0.5');
       tl.fromTo(ctaRef.current, { opacity: 0, y: 16 }, { opacity: 1, y: 0, duration: 0.8 }, '-=0.6');
+
+      return () => {
+        splits.forEach((split) => split.revert());
+      };
     }, containerRef);
 
     return () => ctx.revert();
@@ -70,8 +81,7 @@ export default function Hero({ data }: HeroProps) {
       style={{
         position: 'relative',
         width: '100%',
-        height: '100vh',
-        minHeight: 600,
+        minHeight: '100vh',
         overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
@@ -94,11 +104,34 @@ export default function Hero({ data }: HeroProps) {
           src={data.bgImage || '/images/IMG-20250221-WA0006-scaled.jpg'}
           alt="Premium Menswear Editorial"
           fill
-          style={{ objectFit: 'cover', filter: 'brightness(0.42) contrast(1.08)' }}
+          style={{ objectFit: 'cover', filter: 'brightness(0.5) contrast(1.05) saturate(0.8) sepia(0.12)' }}
           priority
           sizes="100vw"
         />
       </div>
+
+      {/* Warm color grade overlay (multiply warms the shadows) */}
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'rgba(41, 31, 19, 0.32)',
+        mixBlendMode: 'multiply',
+        zIndex: 1,
+        pointerEvents: 'none',
+      }} />
+
+      {/* Ambient overlay — soft panel gradient, top right */}
+      <div style={{
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        width: '60vw',
+        height: '75vh',
+        background: 'radial-gradient(circle at 80% 0%, var(--color-panel), transparent 62%)',
+        opacity: 0.7,
+        zIndex: 1,
+        pointerEvents: 'none',
+      }} />
 
       {/* Gradient overlay */}
       <div style={{
@@ -124,33 +157,19 @@ export default function Hero({ data }: HeroProps) {
         textAlign: 'center',
         position: 'relative',
         zIndex: 2,
-        paddingTop: 80,
+        paddingTop: 170,
       }}>
-        {/* Eyebrow */}
-        <span
-          ref={eyebrowRef}
-          style={{
-            fontSize: 14,
-            color: 'rgba(255,252,225,0.6)',
-            letterSpacing: '0.15em',
-            textTransform: 'uppercase',
-            marginBottom: 24,
-            display: 'block',
-          }}
-        >
-          {data.eyebrow}
-        </span>
-
         {/* Title */}
         <h1
           ref={titleRef}
           style={{
-            fontSize: 'clamp(72px, 12vw, 180px)',
-            lineHeight: 0.92,
+            fontSize: 'clamp(60px, 11vw, 165px)',
+            lineHeight: 'var(--leading-display)',
             fontWeight: 600,
-            letterSpacing: '-0.02em',
-            color: '#fffce1',
-            marginBottom: 32,
+            letterSpacing: 'var(--tracking-display)',
+            color: 'var(--color-cream)',
+            textShadow: 'none',
+            marginBottom: 28,
             textTransform: 'uppercase',
             overflow: 'visible',
           }}
@@ -166,10 +185,23 @@ export default function Hero({ data }: HeroProps) {
         {/* Subheading */}
         <p
           ref={subRef}
-          style={{ fontSize: 16, color: 'rgba(255,252,225,0.55)', maxWidth: 420, lineHeight: 1.6, marginBottom: 40 }}
+          style={{ fontSize: 16, color: 'rgba(255,252,225,0.55)', maxWidth: 420, lineHeight: 1.6, margin: 0 }}
         >
           {data.subheading}
         </p>
+
+        {/* Hairline divider */}
+        <div
+          ref={dividerRef}
+          style={{
+            height: 1,
+            width: 320,
+            maxWidth: '60%',
+            backgroundColor: 'var(--color-hairline)',
+            margin: '40px 0 36px',
+            transformOrigin: 'center',
+          }}
+        />
 
         {/* CTA */}
         <a ref={ctaRef} href="#collections" className="btn-gradient-pill" style={{ fontSize: 15, padding: '14px 36px' }}>

@@ -97,35 +97,7 @@ export default function Header() {
                   position: 'relative',
                 }}
               >
-                {/* Left bracket */}
-                <span
-                  style={{
-                    opacity: isHovered ? 1 : 0,
-                    transform: isHovered ? 'translateX(0)' : 'translateX(6px)',
-                    transition: 'opacity 0.25s ease, transform 0.25s ease',
-                    color: '#b08d57',
-                    marginRight: 4,
-                    fontWeight: 400,
-                  }}
-                >
-                  &#123;
-                </span>
-
                 {link}
-
-                {/* Right bracket */}
-                <span
-                  style={{
-                    opacity: isHovered ? 1 : 0,
-                    transform: isHovered ? 'translateX(0)' : 'translateX(-6px)',
-                    transition: 'opacity 0.25s ease, transform 0.25s ease',
-                    color: '#b08d57',
-                    marginLeft: 4,
-                    fontWeight: 400,
-                  }}
-                >
-                  &#125;
-                </span>
               </Link>
             );
           })}

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&family=DM+Serif+Display:ital@0;1&display=swap');
 @import "tailwindcss";
 
 @theme {
@@ -11,6 +11,7 @@
   --color-gold-light: #e8c88f;
 
   --font-sans: 'Inter Tight', sans-serif;
+  --font-serif: 'DM Serif Display', serif;
   
   --radius-cards: 8px;
   --radius-buttons: 100px;
@@ -26,6 +27,8 @@
   --color-gold: #b08d57;
   --color-gold-light: #e8c88f;
   --gradient-gold: linear-gradient(114.41deg, #b08d57 20%, #e8c88f 65%);
+  --leading-display: 0.9;
+  --tracking-display: -0.02em;
 }
 
 /* Base styles */
@@ -103,6 +106,7 @@ body {
 
 /* Magnetic Ghost Pill Button */
 .btn-ghost-pill {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -110,19 +114,41 @@ body {
   border: 1px solid var(--color-cream);
   border-radius: var(--radius-buttons);
   background-color: transparent;
+  overflow: hidden;
   color: var(--color-cream);
   font-size: 16px;
   font-weight: 400;
-  transition: opacity 0.3s ease, transform 0.1s ease;
+  transition: color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
   cursor: pointer;
   white-space: nowrap;
 }
 
-.btn-ghost-pill:hover {
-  opacity: 0.8;
+.btn-ghost-pill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transform: skewX(-20deg);
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* Gradient CTA Pill */
+.btn-ghost-pill:hover::after {
+  opacity: 1;
+  left: 120%;
+  transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.15s ease;
+}
+
+.btn-ghost-pill:hover {
+  color: var(--color-gold-light);
+  border-color: var(--color-gold);
+  transform: translateY(-1px);
+}
+
+/* Gradient Stroke Outline Pill */
 .btn-gradient-pill {
   position: relative;
   display: inline-flex;
@@ -130,37 +156,82 @@ body {
   justify-content: center;
   padding: 12px 28px;
   border-radius: var(--radius-buttons);
-  background-color: var(--color-canvas);
+  background-color: transparent;
+  overflow: hidden;
   color: var(--color-cream);
   font-size: 16px;
   font-weight: 400;
   cursor: pointer;
   white-space: nowrap;
-  transition: opacity 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .btn-gradient-pill::before {
   content: '';
   position: absolute;
-  inset: -1.5px;
-  border-radius: var(--radius-buttons);
+  inset: 0;
+  border-radius: inherit;
   background: var(--gradient-gold);
-  z-index: -1;
-  transition: opacity 0.3s ease;
+  padding: 1.5px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Shine sweep */
+.btn-gradient-pill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transform: skewX(-20deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.btn-gradient-pill:hover::after {
+  opacity: 1;
+  left: 120%;
+  transition: left 0.7s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.15s ease;
 }
 
 .btn-gradient-pill:hover {
-  opacity: 0.9;
+  color: var(--color-gold-light);
+  transform: translateY(-1px);
 }
 
-/* Bracket annotations */
-.bracket-annotation {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: var(--color-cream);
-  font-size: 16px;
-  font-weight: 400;
+.btn-gradient-pill:hover::before {
+  filter: brightness(1.2);
+}
+/* Horizontal Marquee */
+@keyframes marquee-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+.marquee-container {
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll 32s linear infinite;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  padding-right: 48px;
 }
 
 /* Smooth Scrolling styles */

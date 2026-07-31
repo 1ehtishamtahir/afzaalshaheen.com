@@ -12,6 +12,7 @@ import Lookbook from '@/components/Lookbook';
 import TrustStrip from '@/components/TrustStrip';
 import Newsletter from '@/components/Newsletter';
 import Footer from '@/components/Footer';
+import SocialDock from '@/components/SocialDock';
 
 export default function Home() {
   const [content, setContent] = useState<any>(null);
@@ -66,7 +67,8 @@ export default function Home() {
         <TrustStrip data={content.trustStrip} />
         <Newsletter data={content.newsletter} />
       </main>
-      <Footer />
+      <Footer data={{ socialLinks: content.socialLinks, footer: content.footer, contact: content.contact }} />
+      <SocialDock socialLinks={content.socialLinks} />
     </>
   );
 }
