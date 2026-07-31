@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Lenis from 'lenis';
+import type { SiteContent } from '@/types/site-content';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import BrandStatement from '@/components/BrandStatement';
@@ -15,7 +16,7 @@ import Footer from '@/components/Footer';
 import SocialDock from '@/components/SocialDock';
 
 export default function Home() {
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<SiteContent | null>(null);
 
   useEffect(() => {
     // Fetch dynamic content

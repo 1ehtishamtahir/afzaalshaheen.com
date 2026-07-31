@@ -5,7 +5,6 @@ import Link from 'next/link';
 import SocialIcon from './SocialIcon';
 
 const EXPLORE_LINKS = ['Unstitched Fabric', 'Ready to Wear', 'Signature Collection', 'Lookbook'];
-const SERVICE_LINKS = ['Shipping & Delivery', 'Returns & Exchanges', 'Care Instructions', 'Contact Us'];
 
 interface FooterProps {
   data: {

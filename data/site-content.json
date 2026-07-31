@@ -109,40 +109,28 @@
   },
   "lookbook": [
     {
-      "id": 1,
-      "src": "/images/uploads/1785517941400_imgi_448_IMG-20250218-WA0014-150x100.jpg",
-      "alt": "Premium menswear draped look",
-      "tall": false
+      "src": "/images/uploads/1785523757505_ChatGPT_Image_Jul_31__2026__11_49_01_AM.png",
+      "alt": "Premium menswear look",
+      "tall": false,
+      "id": 1785523086269
     },
     {
-      "id": 2,
-      "src": "/images/uploads/1785517949736_imgi_456_IMG-20250218-WA0015-150x100.jpg",
-      "alt": "Tailored fabric close-up",
-      "tall": true
+      "src": "/images/uploads/1785523760513_ChatGPT_Image_Jul_31__2026__11_49_01_AM.png",
+      "alt": "Premium menswear look",
+      "tall": false,
+      "id": 1785523086972
     },
     {
-      "id": 3,
-      "src": "/images/uploads/1785517957174_imgi_496_IMG-20250218-WA0002-150x100.jpg",
-      "alt": "Textured fabric folds",
-      "tall": false
+      "src": "/images/uploads/1785523763938_ChatGPT_Image_Jul_31__2026__11_49_01_AM.png",
+      "alt": "Premium menswear look",
+      "tall": false,
+      "id": 1785523135909
     },
     {
-      "id": 4,
-      "src": "/images/uploads/1785517971503_imgi_488_IMG-20250218-WA0001-150x100.jpg",
-      "alt": "Premium draped silhouette",
-      "tall": true
-    },
-    {
-      "id": 5,
-      "src": "/images/uploads/1785517979111_imgi_472_IMG-20250218-WA0011-150x100.jpg",
-      "alt": "Classic menswear editorial",
-      "tall": false
-    },
-    {
-      "id": 6,
-      "src": "/images/uploads/1785517985733_imgi_520_WhatsApp-Image-2025-02-18-at-13.25.06_a7aeddf2-150x100.jpg",
-      "alt": "Unstitched fabric details",
-      "tall": true
+      "src": "/images/uploads/1785523766941_ChatGPT_Image_Jul_31__2026__11_49_01_AM.png",
+      "alt": "Premium menswear look",
+      "tall": false,
+      "id": 1785523136349
     }
   ],
   "trustStrip": [
@@ -191,9 +179,9 @@
     ]
   },
   "contact": {
-    "phone": "+92 300 0000000",
+    "phone": "+92 300 1507609",
     "email": "hello@afzaalshaheen.com",
-    "address": "Karachi, Pakistan",
-    "whatsapp": "https://wa.me/923000000000"
+    "address": "Faislabad, Pakistan",
+    "whatsapp": "https://wa.me/923001507609"
   }
 }

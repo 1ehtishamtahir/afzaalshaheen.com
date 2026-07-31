@@ -40,7 +40,7 @@ export async function POST(request: Request) {
 
     // Return the public-facing URL
     return NextResponse.json({ filePath: `/images/uploads/${filename}` });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to upload image file' }, { status: 500 });
   }
 }

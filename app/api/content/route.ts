@@ -13,7 +13,7 @@ export async function GET() {
     const rawData = fs.readFileSync(contentFilePath, 'utf8');
     const data = JSON.parse(rawData);
     return NextResponse.json(data);
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to read content data' }, { status: 500 });
   }
 }
@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     // Write back to file
     fs.writeFileSync(contentFilePath, JSON.stringify(updatedData, null, 2), 'utf8');
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: 'Failed to save content data' }, { status: 500 });
   }
 }

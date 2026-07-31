@@ -1,6 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import type {
+  SiteContent,
+  CollectionItem,
+  ProductItem,
+  FabricBlock,
+  LookbookItem,
+  TrustItem,
+  SocialLink,
+} from '@/types/site-content';
 
 export default function AdminPage() {
   const [password, setPassword] = useState('');
@@ -8,29 +17,10 @@ export default function AdminPage() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
-  const [content, setContent] = useState<any>(null);
+  const [content, setContent] = useState<SiteContent | null>(null);
   const [activeTab, setActiveTab] = useState('hero');
 
-  // Check auth & fetch content
-  useEffect(() => {
-    checkAuth();
-  }, []);
-
-  const checkAuth = async () => {
-    try {
-      const res = await fetch('/api/auth');
-      if (res.ok) {
-        setAuthenticated(true);
-        fetchContent();
-      } else {
-        setAuthenticated(false);
-      }
-    } catch {
-      setAuthenticated(false);
-    }
-  };
-
-  const fetchContent = async () => {
+  const fetchContent = useCallback(async () => {
     try {
       const res = await fetch('/api/content');
       if (res.ok) {
@@ -42,7 +32,25 @@ export default function AdminPage() {
     } catch {
       setError('Connection failed');
     }
-  };
+  }, []);
+
+  // Check auth & fetch content
+  useEffect(() => {
+    const init = async () => {
+      try {
+        const res = await fetch('/api/auth');
+        if (res.ok) {
+          setAuthenticated(true);
+          fetchContent();
+        } else {
+          setAuthenticated(false);
+        }
+      } catch {
+        setAuthenticated(false);
+      }
+    };
+    init();
+  }, [fetchContent]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -105,14 +113,15 @@ export default function AdminPage() {
         const data = await res.json();
         
         // Dynamically update nested content object
-        setContent((prev: any) => {
-          const next = { ...prev };
-          let current = next;
+        setContent((prev) => {
+          const next: Record<string, unknown> = { ...prev };
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          let current: any = next;
           for (let i = 0; i < pathParts.length - 1; i++) {
             current = current[pathParts[i]];
           }
           current[pathParts[pathParts.length - 1]] = data.filePath;
-          return next;
+          return next as unknown as SiteContent;
         });
         setSuccess('Image uploaded and updated!');
         setTimeout(() => setSuccess(''), 3000);
@@ -125,35 +134,38 @@ export default function AdminPage() {
     }
   };
 
-  const addListItem = (key: string, template: any) => {
-    const updated = [...(content[key] || []), { ...template, id: Date.now() }];
-    setContent({ ...content, [key]: updated });
+  type ListKey = 'collections' | 'newArrivals' | 'lookbook' | 'trustStrip' | 'socialLinks';
+
+  const addListItem = <K extends ListKey>(key: K, template: SiteContent[K][number]) => {
+    const list = content![key] as unknown as SiteContent[K][];
+    const updated = [...list, template];
+    setContent({ ...content!, [key]: updated });
   };
 
-  const removeListItem = (key: string, index: number) => {
-    const updated = (content[key] || []).filter((_: any, i: number) => i !== index);
-    setContent({ ...content, [key]: updated });
+  const removeListItem = <K extends ListKey>(key: K, index: number) => {
+    const updated = (content![key] as unknown as SiteContent[K][]).filter((_, i) => i !== index);
+    setContent({ ...content!, [key]: updated });
   };
 
   const addFabricBlock = () => {
-    const updated = { ...content.fabricStory };
+    const updated = { ...content!.fabricStory };
     updated.blocks = [...updated.blocks, { eyebrow: ' The Studio ', title: 'New Story Block', body: 'Block copy here.' }];
-    setContent({ ...content, fabricStory: updated });
+    setContent({ ...content!, fabricStory: updated });
   };
 
   const removeFabricBlock = (index: number) => {
-    const updated = { ...content.fabricStory };
-    updated.blocks = updated.blocks.filter((_: any, i: number) => i !== index);
-    setContent({ ...content, fabricStory: updated });
+    const updated = { ...content!.fabricStory };
+    updated.blocks = updated.blocks.filter((_, i) => i !== index);
+    setContent({ ...content!, fabricStory: updated });
   };
 
   const addPolicyLink = () => {
-    setContent({ ...content, footer: { ...content.footer, policyLinks: [...(content.footer.policyLinks || []), 'New Policy Link'] } });
+    setContent({ ...content!, footer: { ...content!.footer, policyLinks: [...content!.footer.policyLinks, 'New Policy Link'] } });
   };
 
   const removePolicyLink = (index: number) => {
-    const policyLinks = (content.footer.policyLinks || []).filter((_: string, i: number) => i !== index);
-    setContent({ ...content, footer: { ...content.footer, policyLinks } });
+    const policyLinks = content!.footer.policyLinks.filter((_, i) => i !== index);
+    setContent({ ...content!, footer: { ...content!.footer, policyLinks } });
   };
 
   // Login UI
@@ -349,12 +361,12 @@ export default function AdminPage() {
                 <button
                   className="btn-ghost-pill"
                   style={{ padding: '8px 16px', fontSize: 12 }}
-                  onClick={() => addListItem('collections', { title: 'New Collection', subtitle: 'Subtitle copy here.', href: '#', image: '', paddingTop: 0 })}
+                  onClick={() => addListItem('collections', { id: Date.now(), title: 'New Collection', subtitle: 'Subtitle copy here.', href: '#', image: '', paddingTop: 0 })}
                 >
                   + Add Collection
                 </button>
               </div>
-              {content.collections.map((col: any, index: number) => (
+              {content.collections.map((col: CollectionItem, index: number) => (
                 <div key={col.id} style={{ border: '1px solid #42433d', padding: 24, borderRadius: 6, display: 'flex', flexDirection: 'column', gap: 16 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57' }}>Collection Item #{index + 1}</h4>
@@ -427,13 +439,13 @@ export default function AdminPage() {
                 <button
                   className="btn-ghost-pill"
                   style={{ padding: '8px 16px', fontSize: 12 }}
-                  onClick={() => addListItem('newArrivals', { name: 'New Product', price: 'PKR 0000-0000', image: '' })}
+                  onClick={() => addListItem('newArrivals', { id: Date.now(), name: 'New Product', price: 'PKR 0000-0000', image: '' })}
                 >
                   + Add Product
                 </button>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
-                {content.newArrivals.map((product: any, index: number) => (
+                {content.newArrivals.map((product: ProductItem, index: number) => (
                   <div key={product.id} style={{ border: '1px solid #42433d', padding: 20, borderRadius: 6, display: 'flex', flexDirection: 'column', gap: 12 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57', fontSize: 14 }}>Product #{index + 1}</h4>
@@ -534,7 +546,7 @@ export default function AdminPage() {
                 </div>
               </div>
 
-              {content.fabricStory.blocks.map((block: any, index: number) => (
+              {content.fabricStory.blocks.map((block: FabricBlock, index: number) => (
                 <div key={index} style={{ border: '1px solid #42433d', padding: 24, borderRadius: 6, display: 'flex', flexDirection: 'column', gap: 16 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57' }}>Story Block #{index + 1}</h4>
@@ -599,13 +611,13 @@ export default function AdminPage() {
                 <button
                   className="btn-ghost-pill"
                   style={{ padding: '8px 16px', fontSize: 12 }}
-                  onClick={() => addListItem('lookbook', { src: '', alt: 'Premium menswear look', tall: false })}
+                  onClick={() => addListItem('lookbook', { id: Date.now(), src: '', alt: 'Premium menswear look', tall: false })}
                 >
                   + Add Image
                 </button>
               </div>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 24 }}>
-                {content.lookbook.map((img: any, index: number) => (
+                {content.lookbook.map((img: LookbookItem, index: number) => (
                   <div key={img.id} style={{ border: '1px solid #42433d', padding: 20, borderRadius: 6, display: 'flex', flexDirection: 'column', gap: 12 }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                       <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57', fontSize: 14 }}>Image Slot #{index + 1} ({img.tall ? 'Tall' : 'Wide'})</h4>
@@ -669,7 +681,7 @@ export default function AdminPage() {
                   + Add Badge
                 </button>
               </div>
-              {content.trustStrip.map((item: any, index: number) => (
+              {content.trustStrip.map((item: TrustItem, index: number) => (
                 <div key={index} style={{ border: '1px solid #42433d', padding: 20, borderRadius: 6, display: 'flex', flexDirection: 'column', gap: 12 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57', fontSize: 14 }}>Badge #{index + 1}</h4>
@@ -761,9 +773,9 @@ export default function AdminPage() {
                 </button>
               </div>
               <p style={{ fontSize: 13, color: '#7c7c6f', margin: 0 }}>
-                These appear in the footer "Follow" column. Paste the full profile URLs, e.g. https://instagram.com/yourhandle
+                These appear in the footer &ldquo;Follow&rdquo; column. Paste the full profile URLs, e.g. https://instagram.com/yourhandle
               </p>
-              {content.socialLinks.map((link: any, index: number) => (
+              {content.socialLinks.map((link: SocialLink, index: number) => (
                 <div key={index} style={{ border: '1px solid #42433d', padding: 20, borderRadius: 6, display: 'flex', flexDirection: 'column', gap: 12 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <h4 style={{ margin: 0, textTransform: 'uppercase', color: '#b08d57', fontSize: 14 }}>Platform #{index + 1}</h4>
@@ -869,7 +881,7 @@ export default function AdminPage() {
             <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
               <h3 style={{ margin: 0, textTransform: 'uppercase', fontSize: 18 }}>Contact Information</h3>
               <p style={{ fontSize: 13, color: '#7c7c6f', margin: 0 }}>
-                Displayed in the footer "Contact" column.
+                Displayed in the footer &ldquo;Contact&rdquo; column.
               </p>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20 }}>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>

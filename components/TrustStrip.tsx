@@ -34,47 +34,43 @@ export default function TrustStrip({ data }: TrustStripProps) {
         padding: '64px 48px',
       }}
     >
-      <div
-        style={{
-          maxWidth: 1280,
-          margin: '0 auto',
-          display: 'grid',
-          gridTemplateColumns: 'repeat(3, 1fr)',
-          gap: 32,
-        }}
-      >
+      <div className="grid grid-cols-1 gap-8 md:grid-cols-3 md:gap-0" style={{ maxWidth: 1280, margin: '0 auto' }}>
         {data.map((f, i) => (
           <div
             key={i}
+            className={
+              i > 0
+                ? 'border-t border-[#42433d] pt-8 md:border-t-0 md:border-l md:pt-0 md:pl-10'
+                : ''
+            }
             style={{
               display: 'flex',
               flexDirection: 'row',
-              alignItems: 'flex-start',
-              gap: 20,
-              padding: i === 1 ? '0 32px' : '0',
-              borderLeft: i > 0 ? '1px solid #42433d' : 'none',
+              alignItems: 'center',
+              gap: 18,
             }}
           >
             <div
               style={{
                 flexShrink: 0,
-                width: 44,
-                height: 44,
+                width: 46,
+                height: 46,
                 borderRadius: '50%',
-                border: '1px solid #42433d',
+                border: '1px solid rgba(176, 141, 87, 0.35)',
+                backgroundColor: 'rgba(176, 141, 87, 0.06)',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                color: '#fffce1',
+                color: '#b08d57',
               }}
             >
               {icons[i] || icons[0]}
             </div>
-            <div>
-              <h4 style={{ fontSize: 13, color: '#fffce1', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 8, margin: '0 0 8px 0' }}>
+            <div style={{ minWidth: 0 }}>
+              <h4 style={{ fontSize: 14, color: '#fffce1', fontWeight: 600, letterSpacing: '0.12em', textTransform: 'uppercase', margin: '0 0 6px 0' }}>
                 {f.title}
               </h4>
-              <p style={{ fontSize: 13, color: '#7c7c6f', lineHeight: 1.6, margin: 0 }}>{f.body}</p>
+              <p style={{ fontSize: 13, color: '#7c7c6f', lineHeight: 1.6, margin: 0, maxWidth: 280 }}>{f.body}</p>
             </div>
           </div>
         ))}
