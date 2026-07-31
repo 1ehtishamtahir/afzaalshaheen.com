@@ -14,18 +14,18 @@
   "collections": [
     {
       "id": 1,
-      "title": "Unstitched Fabrics",
+      "title": "Exective Cotton ",
       "subtitle": "Premium raw textures for complete tailored personalization.",
       "href": "#unstitched",
-      "image": "/images/WhatsApp-Image-2025-02-18-at-13.25.06_a7aeddf2-scaled.jpg",
+      "image": "/images/uploads/1785517779373_imgi_2_Safeer-Unstitched-Men-Wear-Collection-by-Edenrobe-8.jpg",
       "paddingTop": 0
     },
     {
       "id": 2,
-      "title": "Ready to Wear",
+      "title": "Wash & Wear ",
       "subtitle": "Sharp silhouettes crafted for immediate comfort and style.",
       "href": "#stitched",
-      "image": "/images/IMG-20250218-WA0009-scaled.jpg",
+      "image": "/images/uploads/1785517822256_imgi_88_jjms-2078_charcoal_grey_-430x551.webp",
       "paddingTop": 96
     }
   ],
@@ -38,45 +38,45 @@
     },
     {
       "id": 2,
-      "name": "Midnight Karandi",
-      "price": "PKR 9,200",
-      "image": "/images/IMG-20250218-WA0002-scaled.jpg"
+      "name": "Jet Black Cotton ",
+      "price": "PKR 3400-3800",
+      "image": "/images/uploads/1785517450045_imgi_183_IMG-20250221-WA0010-scaled.jpg"
     },
     {
       "id": 3,
-      "name": "Royal Cotton Set",
-      "price": "PKR 12,000",
-      "image": "/images/IMG-20250218-WA0010-scaled.jpg"
+      "name": "Navy Blue Cotton",
+      "price": "PKR 3400-3800",
+      "image": "/images/uploads/1785517479014_imgi_173_IMG-20250221-WA0011-scaled.jpg"
     },
     {
       "id": 4,
-      "name": "Sandy Linen Coord",
-      "price": "PKR 7,800",
-      "image": "/images/IMG-20250218-WA0012-scaled.jpg"
+      "name": "Camel Cotton ",
+      "price": "PKR 3400-3800",
+      "image": "/images/uploads/1785517501801_imgi_167_38479d39-0269-44ba-944d-759514861399-1-scaled.jpg"
     },
     {
       "id": 5,
-      "name": "Premium Wash Suit",
-      "price": "PKR 10,500",
-      "image": "/images/IMG-20250218-WA0014-scaled.jpg"
+      "name": "Light Grape Cotton",
+      "price": "PKR 3400-3800",
+      "image": "/images/uploads/1785517523549_imgi_150_WhatsApp-Image-2025-02-14-at-07.04.54_7442e752-2-2048x2048.jpg"
     },
     {
       "id": 6,
-      "name": "Formal Elegance",
-      "price": "PKR 11,000",
-      "image": "/images/IMG-20250218-WA0015-scaled.jpg"
+      "name": "Sand Grey Cotton",
+      "price": "PKR 3400-3800",
+      "image": "/images/uploads/1785517552683_imgi_132_IMG-20250221-WA0004-2048x2048.jpg"
     },
     {
       "id": 7,
-      "name": "Heritage Fabric Co.",
-      "price": "PKR 8,800",
-      "image": "/images/IMG-20250218-WA0008-scaled.jpg"
+      "name": "Light Silver Cotton",
+      "price": "PKR 3400-3800",
+      "image": "/images/uploads/1785517579162_imgi_196_IMG-20250221-WA0005-scaled.jpg"
     },
     {
       "id": 8,
-      "name": "Ivory Shalwar Kameez",
-      "price": "PKR 9,600",
-      "image": "/images/IMG-20250218-WA0011-scaled.jpg"
+      "name": "Off White Cotton",
+      "price": "PKR 3400-3800",
+      "image": "/images/uploads/1785517640609_imgi_163_WhatsApp-Image-2025-02-14-at-07.04.54_7442e752-2-scaled.jpg"
     }
   ],
   "fabricStory": {
@@ -88,12 +88,12 @@
         "body": "Every thread of our unstitched fabrics is a testament to heritage craftsmanship. Selected from the finest Egyptian cotton fibers and pure wool blends, our fabrics offer unparalleled drape and hand."
       },
       {
-        "eyebrow": "{ The Selection }",
+        "eyebrow": " The Selection ",
         "title": "Unrivaled Quality",
         "body": "From crisp linen coordinates to luxurious latha suits, our range adapts to every climate and occasion. We respect the raw properties of fibers to ensure durability, softness, and timelessness."
       },
       {
-        "eyebrow": "{ The Heritage }",
+        "eyebrow": " The Heritage ",
         "title": "Decades of Craft",
         "body": "Honoring centuries-old weaving traditions, we collaborate with legendary textile mills to deliver fabrics that command distinction — clothes that live through memory."
       }
@@ -102,37 +102,37 @@
   "lookbook": [
     {
       "id": 1,
-      "src": "/images/IMG-20250221-WA0002-scaled.jpg",
+      "src": "/images/uploads/1785517941400_imgi_448_IMG-20250218-WA0014-150x100.jpg",
       "alt": "Premium menswear draped look",
       "tall": false
     },
     {
       "id": 2,
-      "src": "/images/IMG-20250221-WA0003-scaled.jpg",
+      "src": "/images/uploads/1785517949736_imgi_456_IMG-20250218-WA0015-150x100.jpg",
       "alt": "Tailored fabric close-up",
       "tall": true
     },
     {
       "id": 3,
-      "src": "/images/WhatsApp-Image-2025-02-14-at-07.04.54_7442e752-2-2048x2048.jpg",
+      "src": "/images/uploads/1785517957174_imgi_496_IMG-20250218-WA0002-150x100.jpg",
       "alt": "Textured fabric folds",
       "tall": false
     },
     {
       "id": 4,
-      "src": "/images/IMG-20250221-WA0011-2048x2048.jpg",
+      "src": "/images/uploads/1785517971503_imgi_488_IMG-20250218-WA0001-150x100.jpg",
       "alt": "Premium draped silhouette",
       "tall": true
     },
     {
       "id": 5,
-      "src": "/images/IMG-20250221-WA0008-2048x2048.jpg",
+      "src": "/images/uploads/1785517979111_imgi_472_IMG-20250218-WA0011-150x100.jpg",
       "alt": "Classic menswear editorial",
       "tall": false
     },
     {
       "id": 6,
-      "src": "/images/WhatsApp-Image-2025-05-01-at-8.02.37-AM-2048x2048.jpg",
+      "src": "/images/uploads/1785517985733_imgi_520_WhatsApp-Image-2025-02-18-at-13.25.06_a7aeddf2-150x100.jpg",
       "alt": "Unstitched fabric details",
       "tall": true
     }
